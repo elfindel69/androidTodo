@@ -15,7 +15,7 @@ import com.hb.androidtodo.pojos.Todo;
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_TODO = "todo";
     private TextView tvTodo;
-    private String todoString;
+    private String todoString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
         tvTodo = findViewById(R.id.tvTodo);
         if(savedInstanceState != null){
             todoString = savedInstanceState.getString(KEY_TODO);
-        }else{
-            Todo todo = new Todo("test","Low urgency");
-            todoString = todo.getName()+" // "+todo.getUrgency()+"\n";
         }
 
         tvTodo.setText(todoString);
