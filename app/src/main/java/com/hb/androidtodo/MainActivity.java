@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode,@Nullable Intent data)
     {
         // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2 && resultCode == RESULT_OK)
+        if(requestCode==2 && resultCode == RESULT_OK && data != null)
         {
             Todo todo = (Todo) data.getSerializableExtra(AddTodoActivity.KEY_TODO);
             todoString +=todo.getName()+" // "+todo.getUrgency()+"\n";
