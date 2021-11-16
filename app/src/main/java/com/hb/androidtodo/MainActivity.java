@@ -5,18 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.hb.androidtodo.pojos.Todo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_TODO = "todo";
@@ -70,13 +64,11 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onActivityResult(requestCode, resultCode, data);
         // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2)
+        if(requestCode==2 && resultCode == RESULT_OK)
         {
-            if(resultCode == RESULT_OK){
-                Todo todo = (Todo) data.getSerializableExtra(AddTodoActivity.KEY_TODO);
-                todoString +=todo.getName()+" // "+todo.getUrgency()+"\n";
-                tvTodo.setText(todoString);
-            }
+            Todo todo = (Todo) data.getSerializableExtra(AddTodoActivity.KEY_TODO);
+            todoString +=todo.getName()+" // "+todo.getUrgency()+"\n";
+            tvTodo.setText(todoString);
         }
     }
 }

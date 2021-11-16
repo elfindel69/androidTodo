@@ -52,11 +52,12 @@ public class AddTodoActivity extends AppCompatActivity {
         btnOK.setOnClickListener(v -> {
             String name = edtName.getText().toString();
             if (name.length() < 3){
-                Toast toast = Toast.makeText(getApplicationContext(), "WRONG TEXT", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(), "text should be 3 letters long", Toast.LENGTH_LONG);
                 toast.show();
             }else{
                 String urgency = spUrgency.getSelectedItem().toString();
                 todo = new Todo(name,urgency);
+
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra(KEY_TODO, todo);
                 setResult(RESULT_OK, resultIntent);
@@ -72,5 +73,11 @@ public class AddTodoActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
