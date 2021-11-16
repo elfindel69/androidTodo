@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AndroidTodo</string>
+    <string name="todo">ToDo</string>
+    <string name="name">name</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="add_todo">add todo</string>
+</resources>
