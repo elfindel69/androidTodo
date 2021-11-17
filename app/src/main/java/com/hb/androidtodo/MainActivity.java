@@ -30,13 +30,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         tvTodo.setText(todoString);
-
-
-
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(KEY_TODO, todoString);
 
