@@ -17,7 +17,7 @@ public class TodoDAO extends DAO{
         super(new TodoDBHelper(context));
     }
 
-    public Todo find(int id){
+    public Todo find(Long id){
         Todo todo = null;
 
         open();
@@ -28,7 +28,7 @@ public class TodoDAO extends DAO{
 
         if(cursor != null && cursor.moveToFirst()){
             todo = new Todo();
-            todo.setId(cursor.getInt(TodoDBHelper.TODO_KEY_COLUMN_INDEX));
+            todo.setId(cursor.getLong(TodoDBHelper.TODO_KEY_COLUMN_INDEX));
             todo.setName(cursor.getString(TodoDBHelper.TODO_NAME_COLUMN_INDEX));
             todo.setUrgency(cursor.getString(TodoDBHelper.TODO_URGENCY_COLUMN_INDEX));
 
@@ -51,7 +51,7 @@ public class TodoDAO extends DAO{
         if(cursor!=null && cursor.moveToFirst()){
             while(!cursor.isAfterLast()){
                 Todo todo = new Todo();
-                todo.setId(cursor.getInt(TodoDBHelper.TODO_KEY_COLUMN_INDEX));
+                todo.setId(cursor.getLong(TodoDBHelper.TODO_KEY_COLUMN_INDEX));
                 todo.setName(cursor.getString(TodoDBHelper.TODO_NAME_COLUMN_INDEX));
                 todo.setUrgency(cursor.getString(TodoDBHelper.TODO_URGENCY_COLUMN_INDEX));
 
@@ -76,7 +76,7 @@ public class TodoDAO extends DAO{
         values.put(TodoDBHelper.TODO_URGENCY,todo.getUrgency());
 
         long id = db.insert(TodoDBHelper.TODO_TABLE_NAME ,null,values);
-        todo.setId((int) id);
+        todo.setId(id);
 
         close();
     }
@@ -89,8 +89,9 @@ public class TodoDAO extends DAO{
         values.put(TodoDBHelper.TODO_NAME,todo.getName());
         values.put(TodoDBHelper.TODO_URGENCY,todo.getUrgency());
 
-        db.update(TodoDBHelper.TODO_TABLE_NAME,values,TodoDBHelper.TODO_KEY+ " = ?",
+       db.update(TodoDBHelper.TODO_TABLE_NAME,values,TodoDBHelper.TODO_KEY+ " = ?",
                 new String[]{String.valueOf(todo.getId())});
+
 
         close();
     }

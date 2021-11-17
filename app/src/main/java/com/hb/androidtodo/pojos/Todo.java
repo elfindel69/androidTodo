@@ -3,7 +3,7 @@ package com.hb.androidtodo.pojos;
 import java.io.Serializable;
 
 public class Todo implements Serializable {
-    private int id;
+    private Long id;
     private String name;
     private String urgency;
 
@@ -16,7 +16,7 @@ public class Todo implements Serializable {
         this.urgency = urgency;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -36,7 +36,7 @@ public class Todo implements Serializable {
         this.urgency = urgency;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
