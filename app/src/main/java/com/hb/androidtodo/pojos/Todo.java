@@ -35,4 +35,8 @@ public class Todo implements Serializable {
     public void setUrgency(String urgency) {
         this.urgency = urgency;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
