@@ -5,4 +5,6 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="add_todo">add todo</string>
+    <string name="nom">nom</string>
+    <string name="urgence">urgence</string>
 </resources>

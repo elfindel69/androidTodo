@@ -3,6 +3,8 @@ package com.hb.androidtodo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.hb.androidtodo.adapters.TodoAdapter;
 import com.hb.androidtodo.dao.TodoDAO;
 import com.hb.androidtodo.pojos.Todo;
 
@@ -22,23 +25,28 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_TODO = "todo";
-    private TextView tvTodo;
+    private RecyclerView rvTodo;
     private String todoString = "";
     private List<Todo> todos = new ArrayList<>();
     private Context context;
     private TodoDAO todoDAO;
     private TodoAsyncTasks todoAsyncTasks;
+    private TodoAdapter todoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.recyclerview_main);
         context = getApplicationContext();
 
         todoDAO = new TodoDAO(context);
 
+        rvTodo = findViewById(R.id.rvTodo);
 
-        tvTodo = findViewById(R.id.tvTodo);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        rvTodo.setHasFixedSize(true);
+        rvTodo.setLayoutManager(layoutManager);
+
     }
 
     @Override
@@ -65,15 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void showData(){
-        todos = todoDAO.list();
-        todoString = "";
-        tvTodo.setText("");
-        for (Todo todo : todos){
-            todoString =todo.getName()+" // "+todo.getUrgency()+"\n";
-            tvTodo.append(todoString);
-        }
-    }
+
 
     public class TodoAsyncTasks extends AsyncTask<Nullable, Nullable, List<Todo>> implements com.hb.androidtodo.TodoAsyncTasks {
 
@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Todo> todos){
-            showData();
+           todoAdapter = new TodoAdapter(todos);
+           rvTodo.setAdapter(todoAdapter);
         }
 
 
