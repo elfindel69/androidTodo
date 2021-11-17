@@ -26,12 +26,15 @@ public class MainActivity extends AppCompatActivity {
     private String todoString = "";
     private List<Todo> todos = new ArrayList<>();
     private Context context;
+    private TodoDAO todoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
+
+        todoDAO = new TodoDAO(context);
 
         tvTodo = findViewById(R.id.tvTodo);
         if(savedInstanceState != null){
@@ -79,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTodosFromDAO(){
-        TodoDAO todoDAO = new TodoDAO(context);
         todos = todoDAO.list();
         for (Todo todo : todos){
             Log.d("Request",todo.getName());
