@@ -73,8 +73,6 @@ public class AddTodoActivity extends AppCompatActivity {
         });
 
         btnCancel.setOnClickListener(v->{
-            Intent resultIntent = new Intent();
-            setResult(RESULT_CANCELED, resultIntent);
             finish();
         });
 

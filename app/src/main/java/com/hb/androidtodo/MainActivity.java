@@ -1,14 +1,11 @@
 package com.hb.androidtodo;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -37,14 +34,12 @@ public class MainActivity extends AppCompatActivity {
         todoDAO = new TodoDAO(context);
 
         tvTodo = findViewById(R.id.tvTodo);
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        getTodosFromDAO();
+        showData();
     }
 
     @Override
@@ -57,20 +52,20 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.addToDo) {
             Intent intent = new Intent(context, AddTodoActivity.class);
-            startActivityForResult(intent,2);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    private void getTodosFromDAO(){
+    private void showData(){
         todos = todoDAO.list();
         todoString = "";
+        tvTodo.setText("");
         for (Todo todo : todos){
-            todoString +=todo.getName()+" // "+todo.getUrgency()+"\n";
-
+            todoString =todo.getName()+" // "+todo.getUrgency()+"\n";
+            tvTodo.append(todoString);
         }
-        tvTodo.setText(todoString);
     }
 }
