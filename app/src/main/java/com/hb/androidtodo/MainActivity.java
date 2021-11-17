@@ -37,18 +37,14 @@ public class MainActivity extends AppCompatActivity {
         todoDAO = new TodoDAO(context);
 
         tvTodo = findViewById(R.id.tvTodo);
-        if(savedInstanceState != null){
-            todoString = savedInstanceState.getString(KEY_TODO);
-        }
-        getTodosFromDAO();
-        tvTodo.setText(todoString);
+
+
     }
 
     @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(KEY_TODO, todoString);
-
+    protected void onStart() {
+        super.onStart();
+        getTodosFromDAO();
     }
 
     @Override
@@ -67,24 +63,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressLint("MissingSuperCall")
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,@Nullable Intent data)
-    {
-        // check if the request code is same as what is passed  here it is 2
-        if(requestCode==2 && resultCode == RESULT_OK && data != null)
-        {
-            Todo todo = (Todo) data.getSerializableExtra(AddTodoActivity.KEY_TODO);
-            todoString +=todo.getName()+" // "+todo.getUrgency()+"\n";
-            tvTodo.setText(todoString);
-            getTodosFromDAO();
-        }
-    }
 
     private void getTodosFromDAO(){
         todos = todoDAO.list();
+        todoString = "";
         for (Todo todo : todos){
-            Log.d("Request",todo.getName());
+            todoString +=todo.getName()+" // "+todo.getUrgency()+"\n";
+
         }
+        tvTodo.setText(todoString);
     }
 }

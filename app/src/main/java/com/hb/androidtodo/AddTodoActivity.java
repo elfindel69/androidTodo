@@ -67,9 +67,6 @@ public class AddTodoActivity extends AppCompatActivity {
                 String urgency = spUrgency.getSelectedItem().toString();
                 todo = new Todo(name,urgency);
                 todoDAO.add(todo);
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra(KEY_TODO, todo);
-                setResult(RESULT_OK, resultIntent);
                 finish();
             }
 
